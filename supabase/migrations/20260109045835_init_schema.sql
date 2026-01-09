@@ -8,3 +8,10 @@ create table public.sessions(
 
 );
 
+create table public.attendance (
+    id uuid primary key default gen_random_uuid(),
+    user_id uuid not null references auth.users(id) on delete cascade,
+    created_at timestamptz default now(),
+    unique (user_id, session_id)
+
+);
